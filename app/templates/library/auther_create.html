@@ -1,0 +1,31 @@
+{% extends 'library/base.html' %}
+{% block title %}Yangi muallif{% endblock %}
+
+{% block content %}
+<div style="max-width: 480px">
+    <h1 class="page-title">Yangi muallif</h1>
+    <p class="page-subtitle">Kutubxonaga muallif qo'shing</p>
+
+    <div class="card">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">Muallif ismi</label>
+                <input
+                    type="text"
+                    name="name"
+                    class="form-input"
+                    placeholder="Masalan: Abdulla Qodiriy"
+                    required
+                >
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+                <a href="{% url 'auther_list' %}" class="btn btn-secondary">Bekor qilish</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

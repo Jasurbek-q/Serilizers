@@ -1,0 +1,44 @@
+{% extends 'library/base.html' %}
+{% block title %}Yangi kitob{% endblock %}
+
+{% block content %}
+<div style="max-width: 520px">
+    <h1 class="page-title">Yangi kitob</h1>
+    <p class="page-subtitle">Kutubxonaga yangi kitob qo'shing</p>
+
+    <div class="card">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">Kitob nomi</label>
+                <input
+                    type="text"
+                    name="title"
+                    class="form-input"
+                    placeholder="Masalan: O'tkan kunlar"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Muallif</label>
+                <div class="select-row">
+                    <select name="author" class="form-select" required>
+                        <option value="">— Muallifni tanlang —</option>
+                        {% for author in authors %}
+                            <option value="{{ author.id }}">{{ author.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <a href="{% url 'auther_create' %}" class="btn btn-success">+ Yangi</a>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+                <a href="{% url 'book_list' %}" class="btn btn-secondary">Bekor qilish</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

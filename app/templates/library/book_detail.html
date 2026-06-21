@@ -1,0 +1,30 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 560px">
+    <a href="{% url 'book_list' %}" style="font-size:14px; color:#0071e3; text-decoration:none;">
+        ← Kitoblarga qaytish
+    </a>
+
+    <div class="card" style="margin-top: 1.5rem">
+        <h1 style="font-size:24px; font-weight:700; letter-spacing:-0.3px; margin-bottom:1.5rem">
+            {{ book.title }}
+        </h1>
+
+        <div class="detail-row">
+            <span class="detail-label">Kitob ID</span>
+            <span class="detail-value">#{{ book.pk }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Muallif</span>
+            <span class="badge badge-blue">{{ book.author.name }}</span>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:1.5rem">
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">← Orqaga</a>
+            <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger">O'chirish</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

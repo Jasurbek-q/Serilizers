@@ -1,0 +1,27 @@
+{% extends 'library/base.html' %}
+{% block title %}O'chirish{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px">
+    <div class="card">
+        <h1 style="font-size:22px; font-weight:700; margin-bottom:0.5rem">
+            Kitobni o'chirish
+        </h1>
+        <p style="color:#6e6e73; font-size:15px; margin-bottom:1rem">
+            Bu amalni qaytarib bo'lmaydi
+        </p>
+
+        <div class="warn-box">
+            ⚠ <strong>{{ book.title }}</strong> kitobini o'chirmoqchimisiz?
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Ha, o'chirish</button>
+                <a href="{% url 'book_list' %}" class="btn btn-secondary">Bekor qilish</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

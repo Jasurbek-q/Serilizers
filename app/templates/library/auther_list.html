@@ -1,0 +1,44 @@
+{% extends 'library/base.html' %}
+{% block title %}Mualliflar{% endblock %}
+
+{% block content %}
+<div class="top-bar">
+    <div>
+        <h1 class="page-title">Mualliflar</h1>
+        <p class="page-subtitle">Jami {{ autherlar.count }} ta muallif</p>
+    </div>
+    <a href="{% url 'auther_create' %}" class="btn btn-primary">+ Yangi muallif</a>
+</div>
+
+{% if autherlar %}
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Muallif ismi</th>
+            <th>Kitoblar soni</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for auther in autherlar %}
+        <tr>
+            <td style="color:#6e6e73; width:50px">{{ forloop.counter }}</td>
+            <td style="font-weight:500">{{ auther.name }}</td>
+            <td>
+                <span class="badge badge-green">{{ auther.books.count }} ta kitob</span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card">
+    <div class="empty">
+        <div class="empty-icon">👤</div>
+        <h3>Hali muallif yo'q</h3>
+        <p>Birinchi muallifni qo'shing</p>
+        <a href="{% url 'auther_create' %}" class="btn btn-primary">+ Muallif qo'shish</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

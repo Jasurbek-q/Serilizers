@@ -1,0 +1,51 @@
+{% extends 'library/base.html' %}
+{% block title %}Kitoblar{% endblock %}
+
+{% block content %}
+<div class="top-bar">
+    <div>
+        <h1 class="page-title">Kitoblar</h1>
+        <p class="page-subtitle">Jami {{ books.count }} ta kitob</p>
+    </div>
+    <a href="{% url 'book_create' %}" class="btn btn-primary">+ Yangi kitob</a>
+</div>
+
+{% if books %}
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Kitob nomi</th>
+            <th>Muallif</th>
+            <th>Amallar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td style="color:#6e6e73; width:50px">{{ forloop.counter }}</td>
+            <td style="font-weight:500">{{ book.title }}</td>
+            <td>
+                <span class="badge badge-blue">{{ book.author.name }}</span>
+            </td>
+            <td>
+                <div style="display:flex; gap:8px">
+                    <a href="{% url 'book_detail' book.pk %}" class="btn btn-secondary">Ko'rish</a>
+                    <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger">O'chirish</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card">
+    <div class="empty">
+        <div class="empty-icon">📭</div>
+        <h3>Hali kitob yo'q</h3>
+        <p>Birinchi kitobni qo'shing</p>
+        <a href="{% url 'book_create' %}" class="btn btn-primary">+ Kitob qo'shish</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
